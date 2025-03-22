@@ -1,11 +1,12 @@
 public class Ladron extends Personaje{
     private boolean invisible;
-    public void Guerrero(String nombre, int nivel, int puntosVida, Inventario inventario,boolean invisible){
-        super (nombre, nivel, puntosVida, inventario);
+
+    public Ladron(String nombre, int nivel, int puntosVida, Inventario inventario, boolean invisible) {
+        super(nombre, nivel, puntosVida, inventario);
         this.invisible = invisible;
     }
 
-    public boolean isInvisible() { // estaInvisible es lo mismo que este getter
+    public boolean estaInvisible() {
         return invisible;
     }
 
@@ -14,7 +15,7 @@ public class Ladron extends Personaje{
     }
 
     public void robar(){
-        if (isInvisible() == true){
+        if (estaInvisible()){
             System.out.println("El ladron roba mientras es invisible");
         }
         else {
@@ -23,15 +24,11 @@ public class Ladron extends Personaje{
     }
 
     public void hacerseInvisible(){
-        if (isInvisible() == true){
+        if (estaInvisible()){
             setInvisible(false);
         }
         else {
             setInvisible(true);
         }
     }
-    /* Redundant
-    public boolean estaInvisible(){
-        return isInvisible();
-    }*/
 }

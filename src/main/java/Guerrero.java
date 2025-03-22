@@ -1,8 +1,9 @@
-public class Guerrero extends Personaje{
+public class Guerrero extends Personaje {
     private boolean protegiendo;
     private Personaje compañeroProtegido;
-    public void Guerrero(String nombre, int nivel, int puntosVida, Inventario inventario,boolean protegiendo, Personaje compañeroProtegido){
-        super (nombre, nivel, puntosVida, inventario);
+
+    public Guerrero(String nombre, int nivel, int puntosVida, Inventario inventario, boolean protegiendo, Personaje compañeroProtegido){
+        super(nombre, nivel, puntosVida, inventario);
         this.protegiendo = protegiendo;
         this.compañeroProtegido = compañeroProtegido;
     }
@@ -24,7 +25,7 @@ public class Guerrero extends Personaje{
     }
 
     public void proteger(Personaje compañeroProtegido) {
-        if (isProtegiendo() == false){
+        if (!isProtegiendo()){
             setCompañeroProtegido(compañeroProtegido);
             setProtegiendo(true);
         }
@@ -38,11 +39,21 @@ public class Guerrero extends Personaje{
         setCompañeroProtegido(null);
     }
 
-    public void bajarVida(int vida){
-        puntosVida -= vida;
+    @Override
+    public void bajarVida(int vida){ // todo: Em vui pegar un tiro.
+        if (isProtegiendo()) { // La logica actual afecta al guerrero, ni pta idea de moment seguint l'estructura del projecte com implementar el que demana.
+            if (getPuntosVida() - (vida * 0.5) < 0) {
+                setPuntosVida(0);
+            }
+            else {
+                setPuntosVida(getPuntosVida() - vida);
+            }
+        }
+        //this.puntosVida -= vida;
     }
+
     public Personaje estaProtegiendo(){
-        if (isProtegiendo() == true){
+        if (isProtegiendo()){
             return getCompañeroProtegido();
         }
         else {
