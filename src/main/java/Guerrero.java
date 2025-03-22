@@ -41,13 +41,16 @@ public class Guerrero extends Personaje {
 
     @Override
     public void bajarVida(int vida){ // todo: Em vui pegar un tiro.
-        if (isProtegiendo()) { // La logica actual afecta al guerrero, ni pta idea de moment seguint l'estructura del projecte com implementar el que demana.
-            if (getPuntosVida() - (vida * 0.5) < 0) {
+        if (isProtegiendo()) {  // Ni pta idea de moment seguint l'estructura del projecte com implementar el que demana.
+            if (getCompañeroProtegido().getPuntosVida() - (vida * 0.5) < 0) {
                 setPuntosVida(0);
             }
             else {
-                setPuntosVida(getPuntosVida() - vida);
+                getCompañeroProtegido().setPuntosVida(getCompañeroProtegido().getPuntosVida() - vida);
             }
+        }
+        else {
+            super.bajarVida(vida);
         }
         //this.puntosVida -= vida;
     }
